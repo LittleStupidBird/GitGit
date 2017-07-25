@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script src="../js/extra/hidpi-canvas.min.js"></script>
+    <script src="../js/getData.js"></script>
+    <script src="../js/require.js" data-main="../main"></script>
+    <script>
+		require(['js/dataDB'],function(dataDB){
+			dataDB.pageId = "FA";
+	        dataDB.getDashboardData(BP.dataDashboard);
+			dataDB.updateDashboard();
+		});
+	</script>
+</head>
+<body>
+    <div id="agentDashboard">
+    </div>
+<script type="text/html" id="dashboard-tmpl">
+    <div class="leftContent">
+    	<p>Financial Schema:
+	        [:if(Add["PlanValue"]){:]
+	    		[=:Add["PlanValue"]:] Baht
+	        [:}:]
+        </p>
+
+    	<p>
+	        [:if(Add["PlanGrantDate"]){:]
+	    		[=:Add["PlanGrantDate"]:] - 
+	        [:}:]
+	        [:if(Add["PlanExpireDate"]){:]
+	    		[=:Add["PlanExpireDate"]:]
+	        [:}:]
+        </p>
+    </div>
+
+    <div class="container">
+        <div class="row" id="Dash-first">
+            <div class="col-md-12">
+                <canvas id="mychart0" width="300" height="220"></canvas>
+                <canvas id="mychart1" width="300" height="220"></canvas>
+                <canvas id="mychart2" width="300" height="220"></canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="Leader-Dash-table">
+                    <tr>
+                        <th>vs Goal YTD</th>
+                        [:if(FYC["goal"]){:]
+							[:if(FYC["goal"]>15){:]
+					        	<td><img src="../images/up_arrow_blue.png"/> +[=:FYC["goal"]:]%</td>
+				            [:}else if(FYC["goal"]>0){:]
+					        	<td><img src="../images/up_arrow.png"/> +[=:FYC["goal"]:]%</td>
+					        [:}else{:]
+					    		<td><img src="../images/down_arrow.png"/> [=:FYC["goal"]:]%</td>
+					    	[:}:]
+		        	    [:}else{:]
+		                	<td style="padding-left=80px">-</td>
+		        		[:}:]
+
+                        [:if(FYP["goal"]){:]
+							[:if(FYP["goal"]>15){:]
+					        	<td><img src="../images/up_arrow_blue.png"/> +[=:FYP["goal"]:]%</td>
+				            [:}else if(FYP["goal"]>0){:]
+					        	<td><img src="../images/up_arrow.png"/> +[=:FYP["goal"]:]%</td>
+					        [:}else{:]
+					    		<td><img src="../images/down_arrow.png"/> [=:FYP["goal"]:]%</td>
+					    	[:}:]
+		        	    [:}else{:]
+		                	<td style="padding-left=80px">-</td>
+		        		[:}:]
+
+                        [:if(ANP["goal"]){:]
+							 [:if(ANP["goal"]>15){:]
+					        	<td><img src="../images/up_arrow_blue.png"/> +[=:ANP["goal"]:]%</td>
+				            [:}else if(ANP["goal"]>0){:]
+					        	<td><img src="../images/up_arrow.png"/> +[=:ANP["goal"]:]%</td>
+					        [:}else{:]
+					    		<td><img src="../images/down_arrow.png"/> [=:ANP["goal"]:]%</td>
+					    	[:}:]
+		        	    [:}else{:]
+		                	<td style="padding-left=80px">-</td>
+		        		[:}:]
+                    </tr>
+                    <tr>
+                        <th lang="GROWTH_YTD">Growth YTD</th>
+                        [:if(FYC["growth"]){:]
+							 [:if(FYC["growth"]>15){:]
+					        	<td><img src="../images/up_arrow_blue.png"/> +[=:FYC["growth"]:]%</td>
+				            [:}else if(FYC["growth"]>0){:]
+					        	<td><img src="../images/up_arrow.png"/> +[=:FYC["growth"]:]%</td>
+					        [:}else{:]
+					    		<td><img src="../images/down_arrow.png"/> [=:FYC["growth"]:]%</td>
+					    	[:}:]
+	            	    [:}else{:]
+	                    	<td>-</td>
+	            		[:}:]
+	                    [:if(FYP["growth"]){:]
+							 [:if(FYP["growth"]>15){:]
+					        	<td><img src="../images/up_arrow_blue.png"/> +[=:FYP["growth"]:]%</td>
+				            [:}else if(FYP["growth"]>0){:]
+					        	<td><img src="../images/up_arrow.png"/> +[=:FYP["growth"]:]%</td>
+					        [:}else{:]
+					    		<td><img src="../images/down_arrow.png"/> [=:FYP["growth"]:]%</td>
+					    	[:}:]
+	            	    [:}else{:]
+	                    	<td>-</td>
+	            		[:}:]
+	                    [:if(ANP["growth"]){:]
+							 [:if(ANP["growth"]>15){:]
+					        	<td><img src="../images/up_arrow_blue.png"/> +[=:ANP["growth"]:]%</td>
+				            [:}else if(ANP["growth"]>0){:]
+					        	<td><img src="../images/up_arrow.png"/> +[=:ANP["growth"]:]%</td>
+					        [:}else{:]
+					    		<td><img src="../images/down_arrow.png"/> [=:ANP["growth"]:]%</td>
+					    	[:}:]
+	            	    [:}else{:]
+	                    	<td>-</td>
+	            		[:}:]
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row" id="Dash-second">
+            <canvas id="mychart8" width="280" height="200"></canvas>
+            <div class="fa">
+            <div >
+                Active Month (YTD):
+                    [:if(Add["ActiveMonth"]){:]
+                		<span>[=:Add["ActiveMonth"]:]</span><br>
+			        [:}else{:]
+            			<span></span><br>
+                	[:}:]
+                Training Attendance: 
+                    [:if(Add["Absent"]){:]
+                		absent <span>[=:BP.keepDecimal(Add["Absent"],1):],</span>
+                    	[:if(Add["Late"]){:]
+	                		late <span>[=:BP.keepDecimal(Add["Late"],1):]</span>
+	            		[:}:]
+                		<br>
+			        [:}else{:]
+	        			<span></span><br>
+	            	[:}:]
+                FYC Position among Same Scheme:
+                    [:if(Add["SameClass"]){:]
+                		<span>[=:Add["SameClass"]:]</span><br>
+			        [:}else{:]
+	        			<span></span><br>
+	            	[:}:]
+                FYC Position among All FA (On board):
+                    [:if(Add["AllFa"]){:]
+                		<span>[=:Add["AllFa"]:]</span>
+			        [:}else{:]
+	        			<span></span><br>
+	            	[:}:]
+            </div>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="Dash-second-table" id="Dash-fa-table">
+                    <tr>
+                        <th>vs Goal</th>
+                        [:if(CASES["goal"]){:]
+							[:if(BP.getDataPercentage(CASES["num"], CASES["goal"])>=15){:]
+								<td><img src="../images/up_arrow_blue.png"/> +[=:CASES["goal"]:]</td>
+				            [:}else if(BP.getDataPercentage(CASES["num"], CASES["goal"])>0){:]
+					        	<td><img src="../images/up_arrow.png"/> +[=:CASES["goal"]:]</td>
+					        [:}else{:]
+					    		<td><img src="../images/down_arrow.png"/> [=:CASES["goal"]:]</td>
+					    	[:}:]
+                        [:}else{:]
+                    		<td>-</td>
+                    	[:}:]
+                    </tr>
+                    <tr>
+                        <th lang="D_GROWTH">Growth</th>
+                        [:if(CASES["growth"]){:]
+							[:if(BP.getDataPercentage(CASES["num"], CASES["growth"])>=15){:]
+								<td><img src="../images/up_arrow_blue.png"/> +[=:CASES["growth"]:]</td>
+				            [:} else if(BP.getDataPercentage(CASES["num"], CASES["growth"])>0){:]
+					        	<td><img src="../images/up_arrow.png"/> +[=:CASES["growth"]:]</td>
+					        [:}else{:]
+					    		<td style="width:54%"><img src="../images/down_arrow.png"/> [=:CASES["growth"]:]</td>
+					    	[:}:]
+                        [:}else{:]
+                			<td>-</td>                    	[:}:]
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    </script>
+</body>
+</html>

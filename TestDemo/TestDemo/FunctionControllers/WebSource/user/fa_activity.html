@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Activity</title>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="../js/getData.js"></script>
+    <script src="../js/require.js" data-main="../main"></script>
+    <script src="../js/echarts.js"></script>
+    <script>
+        require(['js/dataAct'], function (dataAct) {
+            dataAct.getActivityData(BP.dataActivity);
+            dataAct.updateActivity();
+        });
+    </script>
+    <style>
+        .activity_top table{
+            width: 98%;
+            margin: auto;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        .activity_top table th,.activity_top table td{
+            width: 120px;
+            line-height: 30px;
+            border-right: solid rgb(164,164,164) 1px;
+        }
+        .activity_top caption{
+            background: rgb(199,0,54);
+            color: #fff;
+            line-height: 35px;
+        }
+        .activity_top table tr:nth-child(1) td{
+            background: rgb(199,0,54);
+            color: #fff;
+            border: 0;
+        }
+        .activity_top table tr:nth-child(2){
+            background: rgb(231,231,231);
+        }
+        .activity_top table tr:nth-child(3){
+            background: rgb(231,231,231);
+        }
+        .activity_top table tr:nth-child(4) td{
+            line-height: 40px;
+        }
+        .activity_top table td span{
+            cursor: pointer;
+            width: 80px;
+            position: relative;
+            display: block;
+            height: 35px;
+            line-height: 35px;
+            background: rgb(100,85,115);
+            color: #fff;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<input id="tag" value="activity" style="display: none">
+<div id="activity">
+    <div class="content">
+        <div class="activity_top">
+            <table>
+                <tr>
+                    <td colspan="5">Adjust for this week [ May 11 - May 15]<span id="tran">Details></span></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>New Prospects</td>
+                    <td>Fact Finds</td>
+                    <td>Closing</td>
+                    <td>Sales</td>
+                </tr>
+                <tr>
+                    <th>iPos Actual</th>
+                    <td>12</td>
+                    <td>3</td>
+                    <td>6</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <th>Addtional Case</th>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>7</td>
+                </tr>
+            </table>
+            <!--<div id="activity_hide">-->
+                <!--<table>-->
+                    <!--<tr>-->
+                        <!--<th></th>-->
+                        <!--<th>New Prospects</th>-->
+                        <!--<th>Fact Finds</th>-->
+                        <!--<th>Closing</th>-->
+                        <!--<th>Sales</th>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<th>iPoS Actual</th>-->
+                        <!--<td>35</td>-->
+                        <!--<td>9</td>-->
+                        <!--<td>4</td>-->
+                        <!--<td>3</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<th>Addtional Case</th>-->
+                        <!--<td><input type="text" value="3"></td>-->
+                        <!--<td><input type="text" value="3"></td>-->
+                        <!--<td><input type="text" value="3"></td>-->
+                        <!--<td><input type="text" value="3"></td>-->
+                    <!--</tr>-->
+                <!--</table>-->
+            <!--</div>-->
+        </div>
+        <table class="activity_mark_tb">
+            <tr>
+                <th>Planned</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Actua</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Additonall</th>
+                <td></td>
+            </tr>
+        </table>
+        <div id="chart_activity" style="height: 400px;width:800px;"></div>
+        <table class="activity_tb">
+            <tr>
+                <td>Last Week</td>
+                <td><span><p>4.0:1</p></span></td>
+                <td><span><p>4.0:1</p></span></td>
+                <td><span><p>4.0:1</p></span></td>
+            </tr>
+            <tr>
+                <td>Last Month</td>
+                <td><span><p>4.0:1</p></span></td>
+                <td><span><p>4.0:1</p></span></td>
+                <td><span><p>4.0:1</p></span></td>
+            </tr>
+            <tr>
+                <td>Last 3 Month</td>
+                <td><span><p>4.0:1</p></span></td>
+                <td><span><p>4.0:1</p></span></td>
+                <td><span><p>4.0:1</p></span></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

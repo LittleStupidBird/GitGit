@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotificationViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gmA-71-FH8">
+                    <rect key="frame" x="90.5" y="10" width="193" height="30"/>
+                    <color key="backgroundColor" red="0.97403724749999998" green="0.88571113400000001" blue="0.75917548379999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="193" id="aOL-bR-4zv"/>
+                    </constraints>
+                    <state key="normal" title="创建一个2分钟后的本地通知"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRatinus">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="creatLocalNotification:" destination="-1" eventType="touchUpInside" id="Xnx-cO-nyv"/>
+                    </connections>
+                </button>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9No-Uc-C14">
+                    <rect key="frame" x="91" y="60" width="193" height="30"/>
+                    <color key="backgroundColor" red="0.97403724749999998" green="0.88571113400000001" blue="0.75917548379999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="EKF-b9-iiZ"/>
+                        <constraint firstAttribute="width" constant="193" id="MDP-Xm-gzg"/>
+                    </constraints>
+                    <state key="normal" title="取消所有本地推送"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRatinus">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="removeAllLocalNotification:" destination="-1" eventType="touchUpInside" id="eb8-rD-0mU"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="9No-Uc-C14" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="LXQ-Z0-wzV"/>
+                <constraint firstItem="gmA-71-FH8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="gvJ-6w-fbA"/>
+                <constraint firstItem="9No-Uc-C14" firstAttribute="top" secondItem="gmA-71-FH8" secondAttribute="bottom" constant="20" id="hm7-xM-z6T"/>
+                <constraint firstItem="gmA-71-FH8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yHq-Hs-Sy7"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
+        </view>
+    </objects>
+</document>

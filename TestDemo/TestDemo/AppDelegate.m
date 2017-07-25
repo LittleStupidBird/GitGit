@@ -8,14 +8,18 @@
 
 #import "AppDelegate.h"
 #import <EventKit/EventKit.h>
-//#import "UICKeyChainStore.h"
 #import <iMOWrapperDylibDev/WrapperConnector.h>
 #import "SecurityUtil.h"
 #import "GTMBase64.h"
 #import "AppAuth.h"
+#import "NotificationService.h"
+
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
 
 
-@interface AppDelegate ()
+@interface AppDelegate () <UNUserNotificationCenterDelegate>
 @property (nonatomic,strong) NSNotification *myNoti;
 @end
 
@@ -25,6 +29,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [self replyPushNotificationAuthorization:application];
     
 //    UICKeyChainStore *keyChainStore = [UICKeyChainStore keyChainStoreWithService:@"com.aiakh.wrapper.keychain" accessGroup:nil];
 //    
@@ -41,9 +46,124 @@
 //    
 //    NSString *token = [WrapperConnector getWrapperDeviceID];
     
-    //配置谷歌日历
+    // 配置谷歌日历
+    
+    // 添加视图层级调试(真机才可用)
+//    Class Test = NSClassFromString(@"UIDebuggingInformationOverlay");
+//    [[Test class] performSelector:@selector(prepareDebuggingOverlay)];
+    
+    // 检查文件完整性，原理是对文件data进行sha256方式加密，然后比对加密后的字符串一致性来判断
+//    [SecurityUtil checkSum];
+    
+    // MD5加密测试-将某个字符串进行md5加密
+//    NSString *res1 = [SecurityUtil stringToMD5:@"772814"];
+//    NSString *res2 = [SecurityUtil stringToMD5:@"A00020"];
+//    NSString *res3 = [SecurityUtil stringToMD5:@"651511"];
+//    NSString *res4 = [SecurityUtil stringToMD5:@"Wang999"];
     
     return YES;
+}
+
+#pragma -mark 申请通知权限
+- (void)replyPushNotificationAuthorization:(UIApplication *)application {
+    // iOS推送测试
+    // iOS 10 之前 UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil]; [application registerUserNotificationSettings:settings];
+    // iOS 10 以后
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    center.delegate = self;
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (granted) {
+            NSLog(@"注册推送成功");
+            // 获取注册详情
+            [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+                NSLog(@"注册详情-%@", settings);
+            }];
+        } else {
+            NSLog(@"注册推送失败");
+            if (error) {
+                NSLog(@"失败详情-%@",error.description);
+            }
+        }
+    }];
+    // 注册获得device Token
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+}
+
+#pragma -mark 注册远程推送
+// 获得Device Token
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *deviceString = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    deviceString = [deviceString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"%@", [NSString stringWithFormat:@"设备Token: %@", deviceString]);
+}
+
+// 获得Device Token失败
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"注册远程推送(获取Token)失败: %@", error);
+}
+
+#pragma -mark UNUserNotificationCenterDelegate
+// The method will be called on the delegate only if the application is in the foreground. If the method is not implemented or the handler is not called in a timely manner then the notification will not be presented. The application can choose to have the notification presented as a sound, badge, alert and/or in the notification list. This decision should be based on whether the information in the notification is otherwise visible to the user.
+// 程序在前台时接收到通知会调用此方法
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    UNNotificationRequest *request = notification.request;
+    
+    // 收到推送的请求
+    UNNotificationContent *content = request.content;
+    // 收到推送的消息内容
+    NSNumber *badge = content.badge;
+    // 推送消息的角标
+    NSString *body = content.body;
+    // 推送消息体
+    UNNotificationSound *sound = content.sound;
+    // 推送消息的声音
+    NSString *subtitle = content.subtitle;
+    // 推送消息的副标题
+    NSString *title = content.title;
+    // 推送消息的标题
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        NSLog(@"iOS10 前台收到远程通知:%@",userInfo);
+    } else {
+        // 判断为本地通知
+        NSLog(@"iOS10 前台收到本地通知:{\\\\nbody:%@，\\\\ntitle:%@,\\\\nsubtitle:%@,\\\\nbadge：%@，\\\\nsound：%@，\\\\nuserInfo：%@\\\\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
+    completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert);
+}
+
+// 用户在点击通知后会调用此方法
+// The method will be called on the delegate when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction. The delegate must be set before the application returns from application:didFinishLaunchingWithOptions:.
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(nonnull UNNotificationResponse *)response withCompletionHandler:(nonnull void (^)(void))completionHandler {
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    UNNotificationRequest *request = response.notification.request;
+    // 收到推送的请求
+    UNNotificationContent *content = request.content;
+    // 收到推送的消息内容
+    NSNumber *badge = content.badge;
+    // 推送消息的角标
+    NSString *body = content.body;
+    // 推送消息体
+    UNNotificationSound *sound = content.sound;
+    // 推送消息的声音
+    NSString *subtitle = content.subtitle;
+    // 推送消息的副标题
+    NSString *title = content.title;
+    // 推送消息的标题
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        NSLog(@"iOS10 收到远程通知:%@", userInfo);
+    } else {
+        // 判断为本地通知
+        NSLog(@"iOS10 收到本地通知:{\\\\nbody:%@，\\\\ntitle:%@,\\\\nsubtitle:%@,\\\\nbadge：%@，\\\\nsound：%@，\\\\nuserInfo：%@\\\\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    completionHandler(); // 系统要求执行这个方法
+}
+
+// iOS7~9接收通知的方法
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    NSLog(@"iOS7及以上系统，收到通知:%@", userInfo); completionHandler(UIBackgroundFetchResultNewData);
+    //此处省略一万行需求代码。。。。。。
+    
 }
 
 - (BOOL)application:(UIApplication *)app

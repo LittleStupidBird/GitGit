@@ -27,5 +27,8 @@
 //将带密码的data转成string
 +(NSString*)decryptAESData:(NSData*)data app_key:(NSString*)key ;
 
-
+//检查文件完整性
++ (void)checkSum;
+//字符串MD5加密
++ (NSString *)stringToMD5:(NSString *)str;
 @end

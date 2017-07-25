@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>By Product</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script src="../js/getData.js"></script>
+    <script src="../js/require.js" data-main="../main"></script>
+    <script src="../js/extra/echarts-2.2.5/build/dist/echarts.js"></script>
+    <script>
+        require(['js/dataBP'],function(dataBP){
+            dataBP.getProductData(BP.dataProduct);
+            dataBP.updateProduct();
+        });
+    </script>
+	<style>
+		.nav>li>a{
+			padding:10px 8px;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12" id="B-title" style="padding-left:0;">
+            <ul class="nav nav-pills nav-jusified" id="top_btn">
+            </ul>
+        </div>
+    </div>
+    <div class="P-second-title">
+        <table class="B-line" id="sub_btn">
+            <tr>
+                <td><a href="#F-MTD" data-toggle="tab" id="MTD" lang="B_MTD">MTD</a></td>
+                <td><a href="#F-QTD" data-toggle="tab" id="QTD" lang="B_QTD">QTD</a></td>
+                <td><a href="#F-YTD" data-toggle="tab" id="YTD" lang="B_YTD">YTD</a></td>
+            </tr>
+        </table>
+    </div>
+    <div class="row" style="float:left;width:50%;">
+        <div id="view"></div>
+    </div>
+    <div id="content" style="float:left;width:50%;">
+    <div id="byProduct"></div>
+    </div>
+</div>
+
+<script type="text/html" id="product-tmpl">
+<div class="row" id="tmpl-product">
+    <div class="B-tab table-responsive tab-content" style="position:relative;">
+        <table id="F-MTD" class="tab-pane fade in active">
+            <tr>
+                <th>Product Line</th>
+                <th>FYC</th>
+                <th>Percentage</th>
+            </tr>
+            <tr>
+                <td class="td1"><div class="bp-border-1"></div>[=:title[0]:]</td>
+                [:if(status){:]
+                    <td>[=:BP.keepDecimal(dataArray_1,1):]</td>
+                [:}else if(dataArray_1){:]
+                    <td>[=:BP.formatMoney(dataArray_1):]</td>
+                [:}else{:]
+                    <td>-</td>
+                [:}:]
+                <td>[=:per[0]:]</td>
+            </tr>
+            <tr>
+                <td class="td2"><div class="bp-border-2"></div>[=:title[1]:]</td>
+                [:if(status){:]
+                    <td>[=:BP.keepDecimal(dataArray_2,1):]</td>
+                [:}else if(dataArray_2){:]
+                    <td>[=:BP.formatMoney(dataArray_2):]</td>
+                [:}else{:]
+                    <td>-</td>
+                [:}:]
+                <td>[=:per[1]:]</td>
+            </tr>
+            <tr>
+                <td class="td3"><div class="bp-border-3"></div>[=:title[2]:]</td>
+                [:if(status){:]
+                    <td>[=:BP.keepDecimal(dataArray_3,1):]</td>
+                [:}else if(dataArray_3){:]
+                    <td>[=:BP.formatMoney(dataArray_3):]</td>
+                [:}else{:]
+                    <td>-</td>
+                [:}:]
+                <td>[=:per[2]:]</td>
+            </tr>
+            <tr>
+                <td class="td4"><div class="bp-border-4"></div>[=:title[3]:]</td>
+                [:if(status){:]
+                    <td>[=:BP.keepDecimal(dataArray_4,1):]</td>
+                [:}else if(dataArray_4){:]
+                    <td>[=:BP.formatMoney(dataArray_4):]</td>
+                [:}else{:]
+                    <td>-</td>
+                [:}:]
+                <td>[=:per[3]:]</td>
+            </tr>
+            <tr>
+                <td class="td5"><div class="bp-border-5"></div>[=:title[4]:]</td>
+                [:if(status){:]
+                    <td>[=:BP.keepDecimal(dataArray_5,1):]</td>
+                [:}else if(dataArray_5){:]
+                    <td>[=:BP.formatMoney(dataArray_5):]</td>
+                [:}else{:]
+                    <td>-</td>
+                [:}:]
+                <td>[=:per[4]:]</td>
+            </tr>
+            <tr>
+                <td class="td6"><div class="bp-border-6"></div>[=:title[5]:]</td>
+                [:if(status){:]
+                    <td>[=:BP.keepDecimal(dataArray_6,1):]</td>
+                [:}else if(dataArray_6){:]
+                    <td>[=:BP.formatMoney(dataArray_6):]</td>
+                [:}else{:]
+                    <td>-</td>
+                [:}:]
+                <td>[=:per[5]:]</td>
+            </tr>
+            <tr>
+	            <td class="td7"><strong lang="B_TOTAL">Total</strong></td>
+	            
+                [:if(status){:]
+                    <td><strong>[=:BP.keepDecimal(dataArray_7,1):]</strong></td>
+                [:}else if(dataArray_7){:]
+                    <td><strong>[=:BP.formatMoney(dataArray_7):]</strong></td>
+                [:}else{:]
+                    <td>-</td>
+                [:}:]
+	            <td><strong>[=:per[6]:]</strong></td>
+            </tr>
+        </table>
+        
+    </div>
+</div>
+</script>
+</body>
+</html>

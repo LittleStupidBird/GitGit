@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>clubsAwards</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script src="../js/getData.js"></script>
+    <script src="../js/require.js" data-main="../main"></script>
+    <script src="../js/extra/echarts-2.2.5/build/dist/echarts.js"></script>
+    <script>
+        require(['js/dataCA'], function (dataCA) {
+            dataCA.getCAData(BP.dataCA);
+            dataCA.updateCAData();
+        });
+    </script>
+</head>
+<body>
+	<div class="container" style="width:900px">
+		<!-- MDRT -->
+		<div class="row" id="MDRT">
+		    <h4>MDRT Current Position</h4>
+		</div>
+	    
+		<!-- Club&Awards -->
+		<div class="row">
+		    <h4></h4>
+		</div>
+		<div class="row" id="clubsAwards">
+	        <h4>Club&Awards</h4>
+	    </div>
+		
+		<!-- Top Agent -->
+		<div class="row">
+		<h4></h4>
+		</div>
+		<div class="row" id="TopAgent">
+		<h4>Top Agent</h4>
+		</div>
+	
+	</div>
+	<script type="text/html" id="ca-tmpl-top">
+        <div class="row C-up">
+            <div class="col-md-3 col-xs-3">
+                <p>MDRT<br>
+                    ([=:BP.formatMoney(Top.MDRT["restTarget"]):])<br>
+                <img src="../images/activity_goals_j.png">
+                </p>
+            </div>
+            <div class="col-md-4 col-xs-4">
+                <p>COT<br>
+                    ([=:BP.formatMoney(Top.COT["restTarget"]):])<br>
+                <img src="../images/activity_goals_j.png">
+                </p>
+            </div>
+            <div class="col-md-4 col-xs-4">
+                <p>TOT<br>
+                    ([=:BP.formatMoney(Top.TOT["restTarget"]):])<br>
+                <img src="../images/activity_goals_j.png">
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning" role="progressbar"
+                     aria-valuenow='[=:Top["MDRT Current Position"]["restValuePercent"]:]' aria-valuemin="0" aria-valuemax="100">
+                </div>
+                <div class="text">FYC</div>
+            </div>
+        </div>
+        <div class="row C-under">
+            <div style="margin-left:20px;">
+                [=:Top["MDRT Current Position"]["restValuePercent"]:]  done, [=:BP.formatMoney(Top["MDRT Current Position"]["Target"]):]
+            </div>
+            <div class="C-add">
+                <div>
+                    <p>[=:Top.MDRT["restValuePercent"]:] to go, [=:BP.formatMoney(Top.MDRT["Target"]):]</p>
+                </div>
+                <div>
+                    <p>[=:Top.COT["restValuePercent"]:] to go, [=:BP.formatMoney(Top.COT["Target"]):]</p>
+                </div>
+                <div>
+                    <p>[=:Top.TOT["restValuePercent"]:] to go, [=:BP.formatMoney(Top.TOT["Target"]):]</p>
+                </div>
+            </div>
+        </div>
+	</script>
+	
+	<!-- Top Agent -->
+	<script type="text/html" id="ca-tmpl-middle">
+		<!-- FYC -->
+		<div class="row">
+		    <div class="col-md-8 col-xs-8">
+		        <div class="row">
+		            <div class="row C-top"></div>
+		        </div>
+		        <div class="row">
+		            <div class="progress">
+		                <div class="progress-bar progress-bar-warning" role="progressbar"
+		                     aria-valuenow='[=:Middle["Top Agent"]["FYC"]["valuePercent"]:]'>
+		                </div>
+		                <div class="text">FYC</div>
+		            </div>
+		        </div>
+		        <div class="row C-under">
+		            <div class="col-md-8 col-xs-8">
+		                [=:Middle["Top Agent"]["FYC"]["valuePercent"]:] done, [=:BP.formatMoney(Middle["Top Agent"]["FYC"]["personKeyValue"]):]K
+		            </div>
+		            <div class="col-md-4 col-xs-4">
+		                [=:Middle["Top Agent"]["FYC"]["valuePercentCut"]:] to go, [=:BP.formatMoney(Middle["Top Agent"]["FYC"]["valueReduce"]):]K
+		            </div>
+		        </div>
+		    </div>
+		    <div class="col-md-2 col-xs-2 C-target">
+		        <div class="row">
+		            <p>[=:BP.formatMoney(Middle["Top Agent"]["FYC"]["KeyValue"]):]K</p>
+		        </div>
+		    </div>
+		</div>
+		
+		<!-- Active months -->
+		<div class="row">
+		    <div class="col-md-8 col-xs-8">
+		        <div class="row">
+		            <div class="row C-top"></div>
+		        </div>
+		        <div class="row">
+		            <div class="progress">
+		                <div class="progress-bar progress-bar-warning" role="progressbar"
+		                     aria-valuenow='[=:Middle["Top Agent"]["Active months"]["valuePercent"]:]'>
+		                </div>
+		                <div class="text">Active months</div>
+		            </div>
+		        </div>
+		        <div class="row C-under">
+		            <div class="col-md-8 col-xs-8">
+		                [=:Middle["Top Agent"]["Active months"]["valuePercent"]:] done, [=:BP.formatMoney(Middle["Top Agent"]["Active months"]["personKeyValue"]):]
+		            </div>
+		            <div class="col-md-4 col-xs-4">
+		                [=:Middle["Top Agent"]["Active months"]["valuePercentCut"]:] to go, [=:BP.formatMoney(Middle["Top Agent"]["Active months"]["valueReduce"]):]
+		            </div>
+		        </div>
+		    </div>
+		    <div class="col-md-2 col-xs-2 C-target">
+		        <div class="row">
+		            <p>[=:BP.formatMoney(Middle["Top Agent"]["FYC"]["KeyValue"]):]</p>
+		        </div>
+		    </div>
+		</div>
+	
+		<!-- Persistency Rate -->
+		<div class="row">
+		    <div class="col-md-8 col-xs-8">
+		        <div class="row">
+		            <div class="row C-top"></div>
+		        </div>
+		        <div class="row">
+		            <div class="progress">
+		                <div class="progress-bar progress-bar-warning" role="progressbar"
+		                     aria-valuenow='[=:Middle["Top Agent"]["Persistency Rate"]["valuePercent"]:]'>
+		                </div>
+		                <div class="text">Persistency Rate</div>
+		            </div>
+		        </div>
+		        <div class="row C-under">
+		            <div class="col-md-8 col-xs-8">
+		                [=:Middle["Top Agent"]["Persistency Rate"]["valuePercent"]:] done, [=:BP.formatMoney(Middle["Top Agent"]["Persistency Rate"]["personKeyValue"]):]
+		            </div>
+		            <div class="col-md-4 col-xs-4">
+		                [=:Middle["Top Agent"]["Persistency Rate"]["valuePercentCut"]:] to go, [=:BP.formatMoney(Middle["Top Agent"]["Persistency Rate"]["valueReduce"]):]
+		            </div>
+		        </div>
+		    </div>
+		    <div class="col-md-2 col-xs-2 C-target">
+		        <div class="row">
+		            <p>[=:BP.formatMoney(Middle["Top Agent"]["Persistency Rate"]["KeyValue"]):]</p>
+		        </div>
+		    </div>
+		</div>
+	    
+	</div>
+	</script>
+
+	<script type="text/html" id="ca-tmpl-bottom-club">
+		<!-- Lifes -->
+	    <div class="row">
+		    <div class="col-md-8 col-xs-8">
+		        <div class="row">
+		            <div class="row C-top">
+		            	Agent's Lives Club
+		            </div>
+		            <div class="row C-top"></div>
+		        </div>
+		        <div class="row">
+		            <div class="progress">
+		                <div class="progress-bar progress-bar-warning" role="progressbar"
+		                     aria-valuenow='[=:Bottom["Agent's Lives Club"]["Lifes"]["valuePercent"]:]'>
+		                </div>
+		                <div class="text">Lives</div>
+		            </div>
+		        </div>
+		        <div class="row C-under">
+		            <div class="col-md-8 col-xs-8">
+		                [=:Bottom["Agent's Lives Club"]["Lifes"]["valuePercent"]:] done, [=:BP.formatMoney(Bottom["Agent's Lives Club"]["Lifes"]["personKeyValue"]):]
+		            </div>
+		            <div class="col-md-4 col-xs-4">
+		                [=:Bottom["Agent's Lives Club"]["Lifes"]["valuePercentCut"]:] to go, [=:BP.formatMoney(Bottom["Agent's Lives Club"]["Lifes"]["valueReduce"]):]
+		            </div>
+		        </div>
+		    </div>
+		    <div class="col-md-2 col-xs-2 C-target">
+		        <div class="row">
+		            <h4></h4>
+		        </div>
+		        <div class="row">
+		            <h4></h4>
+		        </div>
+		        <div class="row">
+		            <h4></h4>
+		        </div>
+		        <div class="row">
+		            <h4></h4>
+		        </div>
+		        <div class="row">
+		            <p>[=:BP.formatMoney(Bottom["Agent's Lives Club"]["Lifes"]["KeyValue"]):]</p>
+		        </div>
+		    </div>
+		</div>
+	
+	    <!-- AP -->
+	    <div class="row">
+		    <div class="col-md-8 col-xs-8">
+		        <div class="row">
+		            <div class="row C-top"></div>
+		        </div>
+		        <div class="row">
+		            <div class="progress">
+		                <div class="progress-bar progress-bar-warning" role="progressbar"
+		                     aria-valuenow='[=:Bottom["Agent's Lives Club"]["AP"]["valuePercent"]:]'>
+		                </div>
+		                <div class="text">L19M</div>
+		            </div>
+		        </div>
+		        <div class="row C-under">
+		            <div class="col-md-8 col-xs-8">
+		                [=:Bottom["Agent's Lives Club"]["AP"]["valuePercent"]:] done, [=:BP.formatMoney(Bottom["Agent's Lives Club"]["AP"]["personKeyValue"]):]
+		            </div>
+		            <div class="col-md-4 col-xs-4">
+		                [=:Bottom["Agent's Lives Club"]["AP"]["valuePercentCut"]:] to go, [=:BP.formatMoney(Bottom["Agent's Lives Club"]["AP"]["valueReduce"]):]
+		            </div>
+		        </div>
+		    </div>
+		    <div class="col-md-2 col-xs-2 C-target">
+		        <div class="row">
+		            <p>[=:BP.formatMoney(Bottom["Agent's Lives Club"]["AP"]["KeyValue"]):]</p>
+		        </div>
+		    </div>
+		</div>
+	</script>
+	
+	<script type="text/html" id="ca-tmpl-bottom-convention">
+		<!-- Annual Convention -->
+	    <!-- Cases -->
+	    <div class="row">
+		    <div class="col-md-8 col-xs-8">
+		        <div class="row">
+		            <div class="row C-top">
+		            	Annual Convention
+		            </div>
+		            <div class="row C-top"></div>
+		        </div>
+		        <div class="row">
+		            <div class="progress">
+		                <div class="progress-bar progress-bar-warning" role="progressbar"
+		                     aria-valuenow='[=:Bottom["Annual Convention"]["Cases"]["valuePercent"]:]'>
+		                </div>
+		                <div class="text">Cases</div>
+		            </div>
+		        </div>
+		        <div class="row C-under">
+		            <div class="col-md-8 col-xs-8">
+		                [=:Bottom["Annual Convention"]["Cases"]["valuePercent"]:] done, [=:BP.formatMoney(Bottom["Annual Convention"]["Cases"]["personKeyValue"]):]
+		            </div>
+		            <div class="col-md-4 col-xs-4">
+		                [=:Bottom["Annual Convention"]["Cases"]["valuePercentCut"]:] to go, [=:BP.formatMoney(Bottom["Annual Convention"]["Cases"]["valueReduce"]):]
+		            </div>
+		        </div>
+		    </div>
+		    <div class="col-md-2 col-xs-2 C-target">
+		        <div class="row">
+		            <h4>Target</h4>
+		        </div>
+		        <div class="row">
+		            <p>[=:BP.formatMoney(Bottom["Annual Convention"]["Cases"]["KeyValue"]):]</p>
+		        </div>
+		    </div>
+		</div>
+		<!-- FYC -->
+	    <div class="row">
+		    <div class="col-md-8 col-xs-8">
+		        <div class="row">
+		            <div class="row C-top"></div>
+		        </div>
+		        <div class="row">
+		            <div class="progress">
+		                <div class="progress-bar progress-bar-warning" role="progressbar"
+		                     aria-valuenow='[=:Bottom["Annual Convention"]["FYC"]["valuePercent"]:]'>
+		                </div>
+		                <div class="text">FYC</div>
+		            </div>
+		        </div>
+		        <div class="row C-under">
+		            <div class="col-md-8 col-xs-8">
+		                [=:Bottom["Annual Convention"]["FYC"]["valuePercent"]:] done, [=:BP.formatMoney(Bottom["Annual Convention"]["FYC"]["personKeyValue"]):]K
+		            </div>
+		            <div class="col-md-4 col-xs-4">
+		                [=:Bottom["Annual Convention"]["FYC"]["valuePercentCut"]:] to go, [=:BP.formatMoney(Bottom["Annual Convention"]["FYC"]["valueReduce"]):]K
+		            </div>
+		        </div>
+		    </div>
+		    <div class="col-md-2 col-xs-2 C-target">
+		        <div class="row">
+		            <p>[=:BP.formatMoney(Bottom["Annual Convention"]["FYC"]["KeyValue"]):]K</p>
+		        </div>
+		    </div>
+		</div>
+		<!-- FYP -->
+	    <div class="row">
+		    <div class="col-md-8 col-xs-8">
+		        <div class="row">
+		            <div class="row C-top"></div>
+		        </div>
+		        <div class="row">
+		            <div class="progress">
+		                <div class="progress-bar progress-bar-warning" role="progressbar"
+		                     aria-valuenow='[=:Bottom["Annual Convention"]["FYP"]["valuePercent"]:]'>
+		                </div>
+		                <div class="text">FYP</div>
+		            </div>
+		        </div>
+		        <div class="row C-under">
+		            <div class="col-md-8 col-xs-8">
+		                [=:Bottom["Annual Convention"]["FYP"]["valuePercent"]:] done, [=:BP.formatMoney(Bottom["Annual Convention"]["FYP"]["personKeyValue"]):]K
+		            </div>
+		            <div class="col-md-4 col-xs-4">
+		                [=:Bottom["Annual Convention"]["FYP"]["valuePercentCut"]:] to go, [=:BP.formatMoney(Bottom["Annual Convention"]["FYP"]["valueReduce"]):]K
+		            </div>
+		        </div>
+		    </div>
+		    <div class="col-md-2 col-xs-2 C-target">
+		        <div class="row">
+		            <p>[=:BP.formatMoney(Bottom["Annual Convention"]["FYP"]["KeyValue"]):]K</p>
+		        </div>
+		    </div>
+		</div>
+	</script>
+</body>
+</html>

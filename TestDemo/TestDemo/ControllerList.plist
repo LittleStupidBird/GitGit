@@ -18,5 +18,9 @@
 	<string>谷歌日历数据获取</string>
 	<key>Office365ViewController</key>
 	<string>Office365数据获取</string>
+	<key>FrameworkViewController</key>
+	<string>测试从Framework创建VC</string>
+	<key>NotificationViewController</key>
+	<string>通知中心测试</string>
 </dict>
 </plist>

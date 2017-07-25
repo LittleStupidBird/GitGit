@@ -155,14 +155,30 @@ static NSString *const kExampleAuthorizerKey = @"authorization";
   [self logMessage:@"Received authorization error: %@", error];
 }
 
+
+- (void)clearCookie:(NSString *)domain {
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [storage cookies]) {
+        if ([cookie.domain rangeOfString:domain].location != NSNotFound) {
+            [storage deleteCookie:cookie];
+        }
+    }
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    
+}
 - (IBAction)authWithAutoCodeExchange:(nullable id)sender {
-  NSURL *issuer = [NSURL URLWithString:kIssuer];
-  NSURL *redirectURI = [NSURL URLWithString:kRedirectURI];
+    //清除cookie
+    [self clearCookie:@"www.google.com"];
+    NSURL *issuer = [NSURL URLWithString:kIssuer];
+    NSURL *redirectURI = [NSURL URLWithString:kRedirectURI];
 
-  [self logMessage:@"Fetching configuration for issuer: %@", issuer];
+    [self logMessage:@"Fetching configuration for issuer: %@", issuer];
 
-  // discovers endpoints
-  [OIDAuthorizationService discoverServiceConfigurationForIssuer:issuer
+    // discovers endpoints
+    [OIDAuthorizationService discoverServiceConfigurationForIssuer:issuer
       completion:^(OIDServiceConfiguration *_Nullable configuration, NSError *_Nullable error) {
 
     if (!configuration) {

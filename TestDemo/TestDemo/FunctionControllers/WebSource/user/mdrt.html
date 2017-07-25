@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>MDRT</title>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script src="../js/getData.js"></script>
+    <script src="../js/require.js" data-main="../main"></script>
+    <script>
+        require(['js/dataMdrt'], function (dataMdrt) {
+            dataMdrt.getMdrtData(BP.dataMdrt);
+            dataMdrt.updateMdrtData();
+        });
+    </script>
+</head>
+<body>
+    <input id="tag" value="mdrt" style="display: none">
+    <div id="mdrt">
+        <div class="content">
+            <script type="text/html" id="mdrt-tmpl">
+            <div class="tb_mdrt">
+				<h1 class="mdrt-h">MDRT</h1>
+				<div class="row">
+        		    <div class="col-md-8 col-xs-8">
+        		    </div>
+        		    <div class="col-md-2 col-xs-2 C-target">
+        		        <div class="row">
+							<h4 lang="TARGET">Target</h4>
+						</div>
+        		    </div>
+        		</div>
+        		<div class="row">
+        		    <div class="col-md-8 col-xs-8">
+        		        <div class="row">
+        		            <div class="row C-top"></div>
+        		        </div>
+        		        <div class="row">
+        		            <div class="progress">
+        		                <div class="progress-bar progress-bar-warning" role="progressbar"
+        		                	aria-valuenow="[=:val[0].TOT.Current:]" aria-valuemin="0" aria-valuemax="[=:val[0].TOT.Agents:]">
+								</div>
+								<div class="text">TOT</div>
+								<span class="mdrt-progress-current">current : [=:val[0].TOT.Current:]</span>
+        		            </div>
+        		        </div>
+        		        <div class="row C-under">
+        		            <div class="col-md-8 col-xs-8">
+        		            </div>
+        		        </div>
+        		    </div>
+        		    <div class="col-md-2 col-xs-2 C-target">
+        		        <div class="row">
+        		            <p>[=:val[0].TOT.Agents:]</p>
+        		        </div>
+        		    </div>
+        		</div>
+
+        		<div class="row">
+        		    <div class="col-md-8 col-xs-8">
+        		        <div class="row">
+        		            <div class="row C-top"></div>
+        		        </div>
+        		        <div class="row">
+        		            <div class="progress">
+        		                <div class="progress-bar progress-bar-warning" role="progressbar"
+        		                	aria-valuenow="[=:val[0].COT.Current:]" aria-valuemin="0" aria-valuemax="[=:val[0].COT.Agents:]">
+								</div>
+        		                <div class="text">COT</div>
+								<span class="mdrt-progress-current">current : [=:val[0].COT.Current:]</span>
+        		            </div>
+							
+        		        </div>
+        		        <div class="row C-under">
+        		            <div class="col-md-8 col-xs-8">
+        		            </div>
+        		        </div>
+        		    </div>
+        		    <div class="col-md-2 col-xs-2 C-target">
+        		        <div class="row">
+        		            <p>[=:val[0].COT.Agents:]</p>
+        		        </div>
+        		    </div>
+        		</div>
+        		<div class="row">
+    		    <div class="col-md-8 col-xs-8">
+    		        <div class="row">
+    		            <div class="row C-top"></div>
+    		        </div>
+    		        <div class="row">
+    		            <div class="progress">
+    		                <div class="progress-bar progress-bar-warning" role="progressbar"
+    		                	aria-valuenow="[=:val[0].MDRT.Current:]" aria-valuemin="0" aria-valuemax="[=:val[0].MDRT.Agents:]">
+    		                </div>
+    		                <div class="text">MDRT</div>
+							<span class="mdrt-progress-current">current : [=:val[0].MDRT.Current:]</span>
+    		            </div>
+    		        </div>
+    		        <div class="row C-under">
+    		            <div class="col-md-8 col-xs-8">
+    		            </div>
+    		        </div>
+    		    </div>
+    		    <div class="col-md-2 col-xs-2 C-target">
+    		        <div class="row">
+    		            <p>[=:val[0].MDRT.Agents:]</p>
+    		        </div>
+    		    </div>
+    		</div>
+    		
+            <div class="mdrt-tab table-responsive tab-content" >
+				<h1 class="mdrt-h">Man Power</h1>
+	            <table id="mdrt-table" class="fade in">
+		            <tr>
+			            <th></th>
+			            <th>FYC</th>
+			            <th>FYP</th>
+			            <th>ANP</th>
+			            <th>Agents</th>
+			            <th>Active&nbsp;Agents</th>
+			            <th>Cases</th>
+						<th>Case&nbsp;Size&nbsp;FYP</th>
+			            <th>Case&nbsp;Size&nbsp;ANP</th>
+			        </tr>
+			        <tr>
+			            <td class="td1">Agent</td>
+		                [:if(val[1]["Agent"]["FYC"]){:]
+			            	<td>[=:val[1]["Agent"]["FYC"]:]</td>
+		        	    [:}else{:]
+		                	<td></td>
+		        		[:}:]
+		                [:if(val[1]["Agent"]["FYP"]){:]
+			            	<td>[=:val[1]["Agent"]["FYP"]:]</td>
+		        	    [:}else{:]
+		                	<td></td>
+		        		[:}:]
+		                [:if(val[1]["Agent"]["ANP"]){:]
+			            	<td>[=:val[1]["Agent"]["ANP"]:]</td>
+		        	    [:}else{:]
+		                	<td></td>
+		        		[:}:]
+		                [:if(val[1]["Agent"]["Agents"]){:]
+			            	<td>[=:val[1]["Agent"]["Agents"]:]</td>
+		        	    [:}else{:]
+		                	<td></td>
+		        		[:}:]
+			                [:if(val[1]["Agent"]["ActiveAgents"]){:]
+			            	<td>[=:val[1]["Agent"]["ActiveAgents"]:]</td>
+			    	    [:}else{:]
+			            	<td></td>
+			    		[:}:]
+				            [:if(val[1]["Agent"]["Cases"]){:]
+				        	<td>[=:val[1]["Agent"]["Cases"]:]</td>
+					    [:}else{:]
+				        	<td></td>
+						[:}:]
+		                [:if(val[1]["Agent"]["CASESIZEFYP"]){:]
+			            	<td>[=:val[1]["Agent"]["CASESIZEFYP"]:]</td>
+			    	    [:}else{:]
+			            	<td></td>
+			    		[:}:]
+				        [:if(val[1]["Agent"]["CaseSize"]){:]
+				        	<td>[=:val[1]["Agent"]["CaseSize"]:]</td>
+					    [:}else{:]
+				        	<td></td>
+						[:}:]
+			        </tr>
+			        <tr>
+			            <td class="td2">FA during 9 months</td>
+				        [:if(val[1]["FA during 9 months"]["FYC"]){:]
+				        	<td>[=:val[1]["FA during 9 months"]["FYC"]:]</td>
+					    [:}else{:]
+				        	<td></td>
+						[:}:]
+				        [:if(val[1]["FA during 9 months"]["FYP"]){:]
+				        	<td>[=:val[1]["FA during 9 months"]["FYP"]:]</td>
+					    [:}else{:]
+				        	<td></td>
+						[:}:]
+				        [:if(val[1]["FA during 9 months"]["ANP"]){:]
+				        	<td>[=:val[1]["FA during 9 months"]["ANP"]:]</td>
+					    [:}else{:]
+				        	<td></td>
+						[:}:]
+				        [:if(val[1]["FA during 9 months"]["Agents"]){:]
+				        	<td>[=:val[1]["FA during 9 months"]["Agents"]:]</td>
+					    [:}else{:]
+				        	<td></td>
+						[:}:]
+				        [:if(val[1]["FA during 9 months"]["ActiveAgents"]){:]
+				        	<td>[=:val[1]["FA during 9 months"]["ActiveAgents"]:]</td>
+					    [:}else{:]
+				        	<td></td>
+						[:}:]
+				        [:if(val[1]["FA during 9 months"]["Cases"]){:]
+					    	<td>[=:val[1]["FA during 9 months"]["Cases"]:]</td>
+					    [:}else{:]
+					    	<td></td>
+						[:}:]
+					    [:if(val[1]["FA during 9 months"]["CASESIZEFYP"]){:]
+							<td>[=:val[1]["FA during 9 months"]["CASESIZEFYP"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA during 9 months"]["CaseSize"]){:]
+							<td>[=:val[1]["FA during 9 months"]["CaseSize"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+			        </tr>
+			        <tr>
+			            <td class="td3">FA after 9 months</td>
+						[:if(val[1]["FA after 9 months"]["FYC"]){:]
+							<td>[=:val[1]["FA after 9 months"]["FYC"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA after 9 months"]["FYP"]){:]
+							<td>[=:val[1]["FA after 9 months"]["FYP"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA after 9 months"]["ANP"]){:]
+							<td>[=:val[1]["FA after 9 months"]["ANP"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA after 9 months"]["Agents"]){:]
+							<td>[=:val[1]["FA after 9 months"]["Agents"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA after 9 months"]["ActiveAgents"]){:]
+							<td>[=:val[1]["FA after 9 months"]["ActiveAgents"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA after 9 months"]["Cases"]){:]
+							<td>[=:val[1]["FA after 9 months"]["Cases"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA after 9 months"]["CASESIZEFYP"]){:]
+							<td>[=:val[1]["FA after 9 months"]["CASESIZEFYP"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA after 9 months"]["CaseSize"]){:]
+							<td>[=:val[1]["FA after 9 months"]["CaseSize"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+			        </tr>
+			        <tr>
+			            <td class="td4">FA Prime during 12 months</td>
+						[:if(val[1]["FA Prime during 12 months"]["FYC"]){:]
+							<td>[=:val[1]["FA Prime during 12 months"]["FYC"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA Prime during 12 months"]["FYP"]){:]
+							<td>[=:val[1]["FA Prime during 12 months"]["FYP"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA Prime during 12 months"]["ANP"]){:]
+							<td>[=:val[1]["FA Prime during 12 months"]["ANP"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA Prime during 12 months"]["Agents"]){:]
+							<td>[=:val[1]["FA Prime during 12 months"]["Agents"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA Prime during 12 months"]["ActiveAgents"]){:]
+							<td>[=:val[1]["FA Prime during 12 months"]["ActiveAgents"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA Prime during 12 months"]["Cases"]){:]
+							<td>[=:val[1]["FA Prime during 12 months"]["Cases"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA Prime during 12 months"]["CASESIZEFYP"]){:]
+							<td>[=:val[1]["FA Prime during 12 months"]["CASESIZEFYP"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA Prime during 12 months"]["CaseSize"]){:]
+							<td>[=:val[1]["FA Prime during 12 months"]["CaseSize"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+			        </tr>
+			        <tr>
+			            <td class="td5">FA Prime after 12 months</td>
+						[:if(val[1]["FA Prime after 12 months"]["FYC"]){:]
+							<td>[=:val[1]["FA Prime after 12 months"]["FYC"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA Prime after 12 months"]["FYP"]){:]
+							<td>[=:val[1]["FA Prime after 12 months"]["FYP"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA Prime after 12 months"]["ANP"]){:]
+							<td>[=:val[1]["FA Prime after 12 months"]["ANP"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA Prime after 12 months"]["Agents"]){:]
+							<td>[=:val[1]["FA Prime after 12 months"]["Agents"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA Prime after 12 months"]["ActiveAgents"]){:]
+							<td>[=:val[1]["FA Prime after 12 months"]["ActiveAgents"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA Prime after 12 months"]["Cases"]){:]
+							<td>[=:val[1]["FA Prime after 12 months"]["Cases"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA Prime after 12 months"]["CASESIZEFYP"]){:]
+							<td>[=:val[1]["FA Prime after 12 months"]["CASESIZEFYP"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+						[:if(val[1]["FA Prime after 12 months"]["CaseSize"]){:]
+							<td>[=:val[1]["FA Prime after 12 months"]["CaseSize"]:]</td>
+						[:}else{:]
+							<td></td>
+						[:}:]
+			        </tr>
+		        </table>
+	        </div>
+        </div>
+       </script>
+    </div></div>
+</body>
+</html>
