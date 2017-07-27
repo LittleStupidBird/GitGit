@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -11,21 +11,25 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotificationViewController">
             <connections>
+                <outlet property="datePicker" destination="osq-Nq-hAq" id="CMe-a4-qrm"/>
+                <outlet property="periodSegment" destination="WaQ-HB-eeo" id="J8Z-XV-SCl"/>
+                <outlet property="repeatSwitch" destination="vYU-sL-0xZ" id="7Vc-dL-4Uf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gmA-71-FH8">
-                    <rect key="frame" x="90.5" y="10" width="193" height="30"/>
+                <button opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gmA-71-FH8">
+                    <rect key="frame" x="110.66666666666669" y="10" width="193" height="30"/>
                     <color key="backgroundColor" red="0.97403724749999998" green="0.88571113400000001" blue="0.75917548379999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="193" id="aOL-bR-4zv"/>
+                        <constraint firstAttribute="height" constant="30" id="FnT-0B-vfP"/>
+                        <constraint firstAttribute="width" constant="193" id="vE3-r9-pUo"/>
                     </constraints>
-                    <state key="normal" title="创建一个2分钟后的本地通知"/>
+                    <state key="normal" title="创建一个10秒后的本地通知"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRatinus">
                             <integer key="value" value="15"/>
@@ -36,11 +40,11 @@
                     </connections>
                 </button>
                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9No-Uc-C14">
-                    <rect key="frame" x="91" y="60" width="193" height="30"/>
+                    <rect key="frame" x="110.66666666666669" y="60" width="193" height="30"/>
                     <color key="backgroundColor" red="0.97403724749999998" green="0.88571113400000001" blue="0.75917548379999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="EKF-b9-iiZ"/>
-                        <constraint firstAttribute="width" constant="193" id="MDP-Xm-gzg"/>
+                        <constraint firstAttribute="height" constant="30" id="7cv-cX-895"/>
+                        <constraint firstAttribute="width" constant="193" id="sES-Gv-NIG"/>
                     </constraints>
                     <state key="normal" title="取消所有本地推送"/>
                     <userDefinedRuntimeAttributes>
@@ -52,13 +56,79 @@
                         <action selector="removeAllLocalNotification:" destination="-1" eventType="touchUpInside" id="eb8-rD-0mU"/>
                     </connections>
                 </button>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="osq-Nq-hAq">
+                    <rect key="frame" x="0.0" y="269" width="414" height="162"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="162" id="6gD-kW-fwb"/>
+                    </constraints>
+                    <date key="date" timeIntervalSinceReferenceDate="522747281.95476002">
+                        <!--2017-07-26 07:34:41 +0000-->
+                    </date>
+                </datePicker>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WaQ-HB-eeo">
+                    <rect key="frame" x="86" y="201" width="242" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="242" id="MsJ-X8-wQR"/>
+                        <constraint firstAttribute="height" constant="28" id="u2v-EB-ypF"/>
+                    </constraints>
+                    <segments>
+                        <segment title="每天"/>
+                        <segment title="每周"/>
+                        <segment title="每月"/>
+                        <segment title="每年"/>
+                    </segments>
+                </segmentedControl>
+                <button opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxR-PM-eO4">
+                    <rect key="frame" x="110.66666666666669" y="480" width="193" height="30"/>
+                    <color key="backgroundColor" red="0.97403724749999998" green="0.88571113400000001" blue="0.75917548379999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="ebb-Z7-8ze"/>
+                        <constraint firstAttribute="width" constant="193" id="uVz-Vk-VYi"/>
+                    </constraints>
+                    <state key="normal" title="创建"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRatinus">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="creatLocalNotification:" destination="-1" eventType="touchUpInside" id="Rey-lm-DhS"/>
+                    </connections>
+                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="T3x-Rp-oEb">
+                    <rect key="frame" x="125.66666666666669" y="130" width="163" height="31"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="是否重复提醒" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4nc-Qf-mNS">
+                            <rect key="frame" x="0.0" y="0.0" width="103.99999999999999" height="31"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vYU-sL-0xZ">
+                            <rect key="frame" x="113.99999999999999" y="0.0" width="51.000000000000014" height="31"/>
+                        </switch>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="163" id="2X0-Dk-u6T"/>
+                        <constraint firstAttribute="height" constant="31" id="rqY-S3-Hwi"/>
+                    </constraints>
+                </stackView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="9No-Uc-C14" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="LXQ-Z0-wzV"/>
-                <constraint firstItem="gmA-71-FH8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="gvJ-6w-fbA"/>
-                <constraint firstItem="9No-Uc-C14" firstAttribute="top" secondItem="gmA-71-FH8" secondAttribute="bottom" constant="20" id="hm7-xM-z6T"/>
-                <constraint firstItem="gmA-71-FH8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yHq-Hs-Sy7"/>
+                <constraint firstItem="pxR-PM-eO4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0IZ-eP-YFF"/>
+                <constraint firstItem="gmA-71-FH8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2g7-uL-v3z"/>
+                <constraint firstItem="WaQ-HB-eeo" firstAttribute="top" secondItem="T3x-Rp-oEb" secondAttribute="bottom" constant="40" id="2pc-P7-FQc"/>
+                <constraint firstItem="osq-Nq-hAq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ai7-U7-OKC"/>
+                <constraint firstItem="9No-Uc-C14" firstAttribute="top" secondItem="gmA-71-FH8" secondAttribute="bottom" constant="20" id="D8E-gW-Hdq"/>
+                <constraint firstItem="pxR-PM-eO4" firstAttribute="top" secondItem="osq-Nq-hAq" secondAttribute="bottom" constant="49" id="FZd-w0-lT1"/>
+                <constraint firstItem="osq-Nq-hAq" firstAttribute="top" secondItem="WaQ-HB-eeo" secondAttribute="bottom" constant="40" id="K5r-Jv-jXA"/>
+                <constraint firstItem="WaQ-HB-eeo" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="P33-Yt-ZnU"/>
+                <constraint firstItem="gmA-71-FH8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="TSz-dv-azF"/>
+                <constraint firstItem="T3x-Rp-oEb" firstAttribute="top" secondItem="9No-Uc-C14" secondAttribute="bottom" constant="40" id="op4-n4-cVN"/>
+                <constraint firstItem="9No-Uc-C14" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="tDe-ou-iem"/>
+                <constraint firstItem="T3x-Rp-oEb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="udh-Rr-6JA"/>
+                <constraint firstAttribute="trailing" secondItem="osq-Nq-hAq" secondAttribute="trailing" id="yo9-km-pcP"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>

@@ -29,7 +29,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [self replyPushNotificationAuthorization:application];
+    [NotificationService replyPushNotificationAuthorization:application andDelegate:self];
     
 //    UICKeyChainStore *keyChainStore = [UICKeyChainStore keyChainStoreWithService:@"com.aiakh.wrapper.keychain" accessGroup:nil];
 //    
@@ -64,32 +64,7 @@
     return YES;
 }
 
-#pragma -mark 申请通知权限
-- (void)replyPushNotificationAuthorization:(UIApplication *)application {
-    // iOS推送测试
-    // iOS 10 之前 UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil]; [application registerUserNotificationSettings:settings];
-    // iOS 10 以后
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    center.delegate = self;
-    [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
-        if (granted) {
-            NSLog(@"注册推送成功");
-            // 获取注册详情
-            [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
-                NSLog(@"注册详情-%@", settings);
-            }];
-        } else {
-            NSLog(@"注册推送失败");
-            if (error) {
-                NSLog(@"失败详情-%@",error.description);
-            }
-        }
-    }];
-    // 注册获得device Token
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
-}
-
-#pragma -mark 注册远程推送
+#pragma -mark 注册远程推送回调
 // 获得Device Token
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSString *deviceString = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
@@ -159,11 +134,22 @@
     completionHandler(); // 系统要求执行这个方法
 }
 
-// iOS7~9接收通知的方法
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    NSLog(@"iOS7及以上系统，收到通知:%@", userInfo); completionHandler(UIBackgroundFetchResultNewData);
+// iOS7~9接收通知的方法，以下两个方法二选一，优先走这个
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+//    NSLog(@"iOS7及以上系统，收到远程通知:%@", userInfo); completionHandler(UIBackgroundFetchResultNewData);
+//    //此处省略一万行需求代码。。。。。。
+//
+//}
+
+// 这个方法与上边的方法二选一，优先走上边的
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"iOS7及以上系统，收到本地通知:%@", userInfo);
     //此处省略一万行需求代码。。。。。。
-    
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    NSLog(@"iOS7及以上系统，收到本地通知:%@", notification.userInfo);
+    //此处省略一万行需求代码。。。。。。
 }
 
 - (BOOL)application:(UIApplication *)app
