@@ -8,20 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		076AF34B223C8D3000A296D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076AF34A223C8D3000A296D3 /* AppDelegate.swift */; };
-		076AF34D223C8D3000A296D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076AF34C223C8D3000A296D3 /* ViewController.swift */; };
 		076AF350223C8D3000A296D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 076AF34E223C8D3000A296D3 /* Main.storyboard */; };
 		076AF352223C8D3100A296D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 076AF351223C8D3100A296D3 /* Assets.xcassets */; };
 		076AF355223C8D3100A296D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 076AF353223C8D3100A296D3 /* LaunchScreen.storyboard */; };
+		076AF35F223C9E3600A296D3 /* BirdTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076AF35E223C9E3600A296D3 /* BirdTabBarController.swift */; };
+		076AF365223CA0E000A296D3 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076AF364223CA0E000A296D3 /* AnimationViewController.swift */; };
+		076AF368223CA44800A296D3 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076AF367223CA44800A296D3 /* Const.swift */; };
+		076AF36A223CA51800A296D3 /* BirdNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076AF369223CA51800A296D3 /* BirdNavigationController.swift */; };
+		07CC9B65223CCD6C003E028D /* BirdEmitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CC9B64223CCD6C003E028D /* BirdEmitterViewController.swift */; };
+		07CC9B68223CCDD2003E028D /* BirdVCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CC9B67223CCDD2003E028D /* BirdVCModel.swift */; };
+		07CC9B6A223CD1E4003E028D /* BirdLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CC9B69223CD1E4003E028D /* BirdLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		076AF347223C8D3000A296D3 /* LittleBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LittleBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076AF34A223C8D3000A296D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		076AF34C223C8D3000A296D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		076AF34F223C8D3000A296D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		076AF351223C8D3100A296D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		076AF354223C8D3100A296D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		076AF356223C8D3100A296D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		076AF35E223C9E3600A296D3 /* BirdTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdTabBarController.swift; sourceTree = "<group>"; };
+		076AF364223CA0E000A296D3 /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
+		076AF367223CA44800A296D3 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		076AF369223CA51800A296D3 /* BirdNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdNavigationController.swift; sourceTree = "<group>"; };
+		07CC9B64223CCD6C003E028D /* BirdEmitterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdEmitterViewController.swift; sourceTree = "<group>"; };
+		07CC9B67223CCDD2003E028D /* BirdVCModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdVCModel.swift; sourceTree = "<group>"; };
+		07CC9B69223CD1E4003E028D /* BirdLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdLog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +66,76 @@
 		076AF349223C8D3000A296D3 /* LittleBird */ = {
 			isa = PBXGroup;
 			children = (
+				076AF360223C9F3A00A296D3 /* Classes */,
 				076AF34A223C8D3000A296D3 /* AppDelegate.swift */,
-				076AF34C223C8D3000A296D3 /* ViewController.swift */,
 				076AF34E223C8D3000A296D3 /* Main.storyboard */,
 				076AF351223C8D3100A296D3 /* Assets.xcassets */,
 				076AF353223C8D3100A296D3 /* LaunchScreen.storyboard */,
 				076AF356223C8D3100A296D3 /* Info.plist */,
 			);
 			path = LittleBird;
+			sourceTree = "<group>";
+		};
+		076AF35D223C9E0F00A296D3 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				076AF35E223C9E3600A296D3 /* BirdTabBarController.swift */,
+				076AF369223CA51800A296D3 /* BirdNavigationController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		076AF360223C9F3A00A296D3 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				076AF366223CA43D00A296D3 /* Others */,
+				076AF362223CA08700A296D3 /* BirdAnimation */,
+				076AF361223C9F4300A296D3 /* Main */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		076AF361223C9F4300A296D3 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				076AF35D223C9E0F00A296D3 /* ViewController */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		076AF362223CA08700A296D3 /* BirdAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				07CC9B66223CCD9D003E028D /* Model */,
+				076AF363223CA0A400A296D3 /* ViewController */,
+			);
+			path = BirdAnimation;
+			sourceTree = "<group>";
+		};
+		076AF363223CA0A400A296D3 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				076AF364223CA0E000A296D3 /* AnimationViewController.swift */,
+				07CC9B64223CCD6C003E028D /* BirdEmitterViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		076AF366223CA43D00A296D3 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				076AF367223CA44800A296D3 /* Const.swift */,
+				07CC9B69223CD1E4003E028D /* BirdLog.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		07CC9B66223CCD9D003E028D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				07CC9B67223CCDD2003E028D /* BirdVCModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +209,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				076AF34D223C8D3000A296D3 /* ViewController.swift in Sources */,
+				076AF36A223CA51800A296D3 /* BirdNavigationController.swift in Sources */,
+				076AF365223CA0E000A296D3 /* AnimationViewController.swift in Sources */,
+				07CC9B65223CCD6C003E028D /* BirdEmitterViewController.swift in Sources */,
+				07CC9B6A223CD1E4003E028D /* BirdLog.swift in Sources */,
 				076AF34B223C8D3000A296D3 /* AppDelegate.swift in Sources */,
+				076AF35F223C9E3600A296D3 /* BirdTabBarController.swift in Sources */,
+				07CC9B68223CCDD2003E028D /* BirdVCModel.swift in Sources */,
+				076AF368223CA44800A296D3 /* Const.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
